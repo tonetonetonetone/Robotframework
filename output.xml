@@ -1,61 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 6.0.2 (Python 3.11.2 on win32)" generated="20230501 15:51:26.746" rpa="false" schemaversion="3">
-<suite id="s1" name="K2 regresion" source="G:\Coding\Robotframework\K2_regresion.robot">
-<test id="s1-t1" name="เปิด BROWSER" line="13">
+<robot generator="Robot 6.1a2.dev1 (Python 3.11.3 on win32)" generated="20230502 22:18:02.981" rpa="false" schemaversion="4">
+<suite id="s1" name="K2 regresion" source="D:\Robotframework\K2_regresion.robot">
+<test id="s1-t1" name="Case : 0 Open Browser" line="8">
 <kw name="Open Browser" library="SeleniumLibrary">
-<arg>${URL}</arg>
-<arg>${BROWSER}</arg>
+<arg>http://uat01.hengleasing.com/Login</arg>
+<arg>Edge</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<msg timestamp="20230501 15:51:26.952" level="INFO">Opening browser 'Edge' to base url 'https://www.google.co.th/'.</msg>
-<status status="PASS" starttime="20230501 15:51:26.951" endtime="20230501 15:51:29.095"/>
+<msg timestamp="20230502 22:18:03.126" level="INFO">Opening browser 'Edge' to base url 'http://uat01.hengleasing.com/Login'.</msg>
+<msg timestamp="20230502 22:18:03.131" level="INFO">Executing: C:\Users\Sombun.Th\AppData\Local\Programs\Python\Python311\Lib\site-packages\selenium\webdriver\common\windows\selenium-manager.exe --browser edge --output json</msg>
+<status status="PASS" starttime="20230502 22:18:03.126" endtime="20230502 22:18:05.185"/>
 </kw>
-<status status="PASS" starttime="20230501 15:51:26.951" endtime="20230501 15:51:29.096"/>
-</test>
-<test id="s1-t2" name="ใส่ข้อความ" line="15">
+<kw name="Login">
+<arg>P_Manager0001</arg>
+<arg>Dev@te5t</arg>
 <kw name="Input Text" library="SeleniumLibrary">
-<arg>//*[@id="APjFqb"]</arg>
-<arg>${MESSAGE}</arg>
+<arg>${USERNAME TEXTBOX}</arg>
+<arg>${username}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<msg timestamp="20230501 15:51:29.098" level="INFO">Typing text 'Robotframework' into text field '//*[@id="APjFqb"]'.</msg>
-<status status="PASS" starttime="20230501 15:51:29.097" endtime="20230501 15:51:29.184"/>
+<msg timestamp="20230502 22:18:05.187" level="INFO">Typing text 'P_Manager0001' into text field 'xpath://*[@id="Username"]'.</msg>
+<status status="PASS" starttime="20230502 22:18:05.186" endtime="20230502 22:18:05.267"/>
 </kw>
 <kw name="Sleep" library="BuiltIn">
 <arg>1</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<msg timestamp="20230501 15:51:30.185" level="INFO">Slept 1 second</msg>
-<status status="PASS" starttime="20230501 15:51:29.185" endtime="20230501 15:51:30.185"/>
+<msg timestamp="20230502 22:18:06.268" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20230502 22:18:05.267" endtime="20230502 22:18:06.268"/>
 </kw>
-<status status="PASS" starttime="20230501 15:51:29.097" endtime="20230501 15:51:30.185"/>
-</test>
-<test id="s1-t3" name="กดปุ่ม &quot;ค้นหา&quot;" line="18">
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${PASSWORD TEXTBOX}</arg>
+<arg>${password}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230502 22:18:06.269" level="INFO">Typing text 'Dev@te5t' into text field 'xpath://*[@id="Password"]'.</msg>
+<status status="PASS" starttime="20230502 22:18:06.268" endtime="20230502 22:18:06.353"/>
+</kw>
 <kw name="Click Element" library="SeleniumLibrary">
-<arg>//*[@name="btnK"]</arg>
+<arg>${LOGIN BUTTON}</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<msg timestamp="20230501 15:51:30.187" level="INFO">Clicking element '//*[@name="btnK"]'.</msg>
-<status status="PASS" starttime="20230501 15:51:30.186" endtime="20230501 15:51:33.002"/>
+<msg timestamp="20230502 22:18:06.354" level="INFO">Clicking element 'xpath://*[@id="btnLogin"]'.</msg>
+<status status="PASS" starttime="20230502 22:18:06.353" endtime="20230502 22:18:11.448"/>
 </kw>
 <kw name="Sleep" library="BuiltIn">
-<arg>1</arg>
+<arg>3</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<msg timestamp="20230501 15:51:34.003" level="INFO">Slept 1 second</msg>
-<status status="PASS" starttime="20230501 15:51:33.002" endtime="20230501 15:51:34.003"/>
+<msg timestamp="20230502 22:18:14.448" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20230502 22:18:11.448" endtime="20230502 22:18:14.448"/>
 </kw>
-<kw name="Close Browser" library="SeleniumLibrary">
-<doc>Closes the current browser.</doc>
-<status status="PASS" starttime="20230501 15:51:34.003" endtime="20230501 15:51:36.126"/>
+<status status="PASS" starttime="20230502 22:18:05.186" endtime="20230502 22:18:14.448"/>
 </kw>
-<status status="PASS" starttime="20230501 15:51:30.186" endtime="20230501 15:51:36.126"/>
+<status status="PASS" starttime="20230502 22:18:03.125" endtime="20230502 22:18:14.449"/>
 </test>
-<status status="PASS" starttime="20230501 15:51:26.748" endtime="20230501 15:51:36.127"/>
+<status status="PASS" starttime="20230502 22:18:02.983" endtime="20230502 22:18:14.452"/>
 </suite>
 <statistics>
 <total>
-<stat pass="3" fail="0" skip="0">All Tests</stat>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="3" fail="0" skip="0" id="s1" name="K2 regresion">K2 regresion</stat>
+<stat pass="1" fail="0" skip="0" id="s1" name="K2 regresion">K2 regresion</stat>
 </suite>
 </statistics>
 <errors>

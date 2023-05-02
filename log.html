@@ -5,7 +5,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="Robot Framework 6.0.2 (Python 3.11.2 on win32)" name="Generator">
+<meta content="Robot Framework 6.1a2.dev1 (Python 3.11.3 on win32)" name="Generator">
 <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKcAAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAAqAAAAAAAAAAAAAAAAAAAALIAAAD/AAAA4AAAANwAAADcAAAA3AAAANwAAADcAAAA3AAAANwAAADcAAAA4AAAAP8AAACxAAAAAAAAAKYAAAD/AAAAuwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC/AAAA/wAAAKkAAAD6AAAAzAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN8AAAD/AAAA+gAAAMMAAAAAAAAAAgAAAGsAAABrAAAAawAAAGsAAABrAAAAawAAAGsAAABrAAAADAAAAAAAAADaAAAA/wAAAPoAAADDAAAAAAAAAIsAAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAANEAAAAAAAAA2gAAAP8AAAD6AAAAwwAAAAAAAAAAAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAFAAAAAAAAANoAAAD/AAAA+gAAAMMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADaAAAA/wAAAPoAAADDAAAAAAAAADwAAAB8AAAAAAAAAGAAAABcAAAAAAAAAH8AAABKAAAAAAAAAAAAAAAAAAAA2gAAAP8AAAD6AAAAwwAAAAAAAADCAAAA/wAAACkAAADqAAAA4QAAAAAAAAD7AAAA/wAAALAAAAAGAAAAAAAAANoAAAD/AAAA+gAAAMMAAAAAAAAAIwAAAP4AAAD/AAAA/wAAAGAAAAAAAAAAAAAAAMkAAAD/AAAAigAAAAAAAADaAAAA/wAAAPoAAADDAAAAAAAAAAAAAAAIAAAAcAAAABkAAAAAAAAAAAAAAAAAAAAAAAAAEgAAAAAAAAAAAAAA2gAAAP8AAAD7AAAAywAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN4AAAD/AAAAqwAAAP8AAACvAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALIAAAD/AAAAsgAAAAAAAAC5AAAA/wAAAMoAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMkAAAD/AAAAvAAAAAAAAAAAAAAAAAAAAKwAAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAArQAAAAAAAAAAwAMAAIABAAAf+AAAP/wAAD/8AAAgBAAAP/wAAD/8AAA//AAAJIwAADHEAAA//AAAP/wAAB/4AACAAQAAwAMAAA==">
 <style media="all" type="text/css">
 /* Generic and misc styles */
@@ -1355,7 +1355,7 @@ window.testdata = function () {
     var LEVELS = ['TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FAIL', 'SKIP'];
     var STATUSES = ['FAIL', 'PASS', 'SKIP', 'NOT RUN'];
     var KEYWORD_TYPES = ['KEYWORD', 'SETUP', 'TEARDOWN', 'FOR', 'ITERATION', 'IF', 'ELSE IF', 'ELSE', 'RETURN',
-                         'TRY', 'EXCEPT', 'FINALLY', 'WHILE', 'CONTINUE', 'BREAK'];
+                         'TRY', 'EXCEPT', 'FINALLY', 'WHILE', 'CONTINUE', 'BREAK', 'ERROR'];
     function addElement(elem) {
         if (!elem.id)
             elem.id = uniqueId();
@@ -1803,25 +1803,25 @@ function stopPropagation(event) {
 window.output = {};
 </script>
 <script type="text/javascript">
-window.output["suite"] = [1,2,3,0,[],[1,0,9379],[],[[4,0,0,[],[1,203,2145],[[0,5,6,0,7,8,0,0,[1,203,2144],[[204,2,9]]]]],[10,0,0,[],[1,2349,1088],[[0,11,6,0,12,13,0,0,[1,2349,87],[[2350,2,14]]],[0,15,16,0,17,18,0,0,[1,2437,1000],[[3437,2,19]]]]],[20,0,0,[],[1,3438,5940],[[0,21,6,0,22,23,0,0,[1,3438,2816],[[3439,2,24]]],[0,15,16,0,17,18,0,0,[1,6254,1001],[[7255,2,19]]],[0,25,6,0,26,0,0,0,[1,7255,2123],[]]]]],[],[3,3,0,0]];
+window.output["suite"] = [1,2,3,0,[],[1,0,11469],[],[[4,0,0,[],[1,142,11324],[[0,5,6,0,7,8,0,0,[1,143,2059],[[143,2,9],[148,2,10]]],[0,11,0,0,0,12,0,0,[1,2203,9262],[[0,13,6,0,14,15,0,0,[1,2203,81],[[2204,2,16]]],[0,17,18,0,19,20,0,0,[1,2284,1001],[[3285,2,21]]],[0,13,6,0,14,22,0,0,[1,3285,85],[[3286,2,23]]],[0,24,6,0,25,26,0,0,[1,3370,5095],[[3371,2,27]]],[0,17,18,0,19,28,0,0,[1,8465,3000],[[11465,2,29]]]]]]]],[],[1,1,0,0]];
 </script>
 <script type="text/javascript">
 window.output["strings"] = [];
 </script>
 <script type="text/javascript">
-window.output["strings"] = window.output["strings"].concat(["*","*K2 regresion","*G:\\Coding\\Robotframework\\K2_regresion.robot","*K2_regresion.robot","*เปิด BROWSER","*Open Browser","*SeleniumLibrary","*<p>Opens a new browser instance to the optional <code>url\x3c/code>.\x3c/p>","*${URL}, ${BROWSER}","*Opening browser 'Edge' to base url '<a href=\"https://www.google.co.th/\">https://www.google.co.th/\x3c/a>'.","*ใส่ข้อความ","*Input Text","*<p>Types the given <code>text\x3c/code> into the text field identified by <code>locator\x3c/code>.\x3c/p>","*//*[@id=\"APjFqb\"], ${MESSAGE}","*Typing text 'Robotframework' into text field '//*[@id=\"APjFqb\"]'.","*Sleep","*BuiltIn","*<p>Pauses the test executed for the given time.\x3c/p>","*1","*Slept 1 second","*กดปุ่ม &quot;ค้นหา&quot;","*Click Element","*<p>Click the element identified by <code>locator\x3c/code>.\x3c/p>","*//*[@name=\"btnK\"]","*Clicking element '//*[@name=\"btnK\"]'.","*Close Browser","*<p>Closes the current browser.\x3c/p>"]);
+window.output["strings"] = window.output["strings"].concat(["*","*K2 regresion","*D:\\Robotframework\\K2_regresion.robot","*K2_regresion.robot","*Case : 0 Open Browser","*Open Browser","*SeleniumLibrary","*<p>Opens a new browser instance to the optional <code>url\x3c/code>.\x3c/p>","*<a href=\"http://uat01.hengleasing.com/Login\">http://uat01.hengleasing.com/Login\x3c/a>, Edge","*Opening browser 'Edge' to base url '<a href=\"http://uat01.hengleasing.com/Login\">http://uat01.hengleasing.com/Login\x3c/a>'.","*Executing: C:\\Users\\Sombun.Th\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\selenium\\webdriver\\common\\windows\\selenium-manager.exe --browser edge --output json","*Login","*P_Manager0001, Dev@te5t","*Input Text","*<p>Types the given <code>text\x3c/code> into the text field identified by <code>locator\x3c/code>.\x3c/p>","*${USERNAME TEXTBOX}, ${username}","*Typing text 'P_Manager0001' into text field '<a href=\"xpath://*[@id=&quot;Username\">xpath://*[@id=\"Username\x3c/a>\"]'.","*Sleep","*BuiltIn","*<p>Pauses the test executed for the given time.\x3c/p>","*1","*Slept 1 second","*${PASSWORD TEXTBOX}, ${password}","*Typing text 'Dev@te5t' into text field '<a href=\"xpath://*[@id=&quot;Password\">xpath://*[@id=\"Password\x3c/a>\"]'.","*Click Element","*<p>Click the element identified by <code>locator\x3c/code>.\x3c/p>","*${LOGIN BUTTON}","*Clicking element '<a href=\"xpath://*[@id=&quot;btnLogin\">xpath://*[@id=\"btnLogin\x3c/a>\"]'.","*3","*Slept 3 seconds"]);
 </script>
 <script type="text/javascript">
-window.output["stats"] = [[{"elapsed":"00:00:09","fail":0,"label":"All Tests","pass":3,"skip":0}],[],[{"elapsed":"00:00:09","fail":0,"id":"s1","label":"K2 regresion","name":"K2 regresion","pass":3,"skip":0}]];
+window.output["stats"] = [[{"elapsed":"00:00:11","fail":0,"label":"All Tests","pass":1,"skip":0}],[],[{"elapsed":"00:00:11","fail":0,"id":"s1","label":"K2 regresion","name":"K2 regresion","pass":1,"skip":0}]];
 </script>
 <script type="text/javascript">
 window.output["errors"] = [];
 </script>
 <script type="text/javascript">
-window.output["baseMillis"] = 1682931086748;
+window.output["baseMillis"] = 1683040682983;
 </script>
 <script type="text/javascript">
-window.output["generated"] = 9388;
+window.output["generated"] = 11484;
 </script>
 <script type="text/javascript">
 window.output["expand_keywords"] = null;

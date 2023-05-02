@@ -1,21 +1,19 @@
 *** Settings ***
-Library         SeleniumLibrary
-
-*** Variables ***
-${URL}  https://www.google.co.th/
-${BROWSER}  Edge
-${MESSAGE}   Robotframework
-
+Library           SeleniumLibrary
+*** Variable ***
+${LOGIN BUTTON}  xpath://*[@id="btnLogin"]
+${USERNAME TEXTBOX}  xpath://*[@id="Username"]
+${PASSWORD TEXTBOX}  xpath://*[@id="Password"]
+*** Test Case ***
+Case : 0 Open Browser
+    Open Browser        http://uat01.hengleasing.com/Login   Edge
+    Login  P_Manager0001  Dev@te5t
 *** Keywords ***
-
-    
-*** Test Cases ***
-เปิด BROWSER
-    Open BROWSER  ${URL}   ${BROWSER}
-ใส่ข้อความ
-    Input Text  //*[@id="APjFqb"]    ${MESSAGE}
-    Sleep   1
-กดปุ่ม "ค้นหา"
-    Click Element    //*[@name="btnK"]
-    Sleep   1
-    Close BROWSER
+Login
+    [Arguments]  ${username}  ${password}
+    Input Text  ${USERNAME TEXTBOX}  ${username}
+    Sleep  1
+    Input Text  ${PASSWORD TEXTBOX}  ${password}
+    Sleep  1
+    Click Element  ${LOGIN BUTTON}  
+    Sleep  3
