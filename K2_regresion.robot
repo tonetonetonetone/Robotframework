@@ -11,7 +11,16 @@ ${USERNAME TEXTBOX}  xpath=//*[@id="Username"]
 ${PASSWORD TEXTBOX}  xpath=//*[@id="Password"]
  #เลือกประเภทสินเชื่อ
 ${CHOICE P-LOAN}  xpath=//div[@class="bootstrap-dialog-message"]/a[@class="btn btn-requisition-create btn-block btn-color3"]
+######### ข้อมูลผู้กู้ #############
+#ใส่เลขบัตรประชาชน
 ${CARD NUMBER TEXTBOX}  xpath=//*[@id="IDCardNo"]
+#ใส่ชื่อ/นามสกุล
+${FIRST NAME}   ทดสอบ 001
+${SURE NAME}    นามสกุล นายทดสอบ 001 
+#วันเดือนปีเกิด
+${AGE}      03/05/2530
+#ประเภทเงินกู้ 
+#${TypeSelect}   
 *** Test Case ***
 Case 0 : OpenBrowser
     [Documentation]  OpenBrowser>Login>InputUsernamePassword
@@ -24,6 +33,9 @@ Case 1 : ใบคำขอสินเชื่อ>รายการใบค�
 Case 2 : เลือกประเภทสินเชื่อ
     [Documentation]  เลือกประเภทสินเชื่อซักอัน
     Typeloan
+Case 3 : Input Text
+    [Documentation]    กรอกรายละเอียด"ใบคำขอสินเชื่อ"
+    INPUT  6128717074264
 *** Keywords ***
 Login
     [Documentation]  Arguments Login & CardNumber
@@ -50,12 +62,30 @@ Typeloan
     Click Element   ${CHOICE P-LOAN}
     Sleep           ${DELAY}
     Click Element   xpath=//div[@class="col-md-6"]/a[@id="btnFillIn"]
-    Sleep           10
-
-#CardNumber
-    #[Arguments]  ${CARD}
-    #Input Text  ${CARD NUMBER TEXTBOX}  ${CARD}
-    #Sleep  4
-
-
-  
+    Sleep           ${DELAY}
+INPUT
+#ข้อมูลผู้กู้
+    [Documentation]   ข้อมูลผู้กู้
+    [Arguments]  ${CARD}
+    Input Text  ${CARD NUMBER TEXTBOX}  ${CARD}
+    Sleep   ${DELAY}
+    Input Text       xpath=//*[@id="FirstNameTH"]  ${FIRST NAME}
+    Input Text       xpath=//*[@id="LastNameTH"]  ${SURE NAME}
+    Sleep   ${DELAY}
+    #DropDown ประเภทเงินกู้
+    Click Element    xpath=//*[@id="CustomerDemandTypeID"]/option[2]
+    Sleep   ${DELAY}
+    #DropDown เพศ
+    Click Element    xpath=//*[@id="PrefixID"]/option[2]
+    Sleep   ${DELAY}
+    #DropDown ระดับการศึกษา
+    Click Element   xpath=//*[@id="EducationLevelID"]/option[6]
+    Input Text  xpath=//*[@id="BirthDate"]    ${AGE}
+    #DropDown วันที่ออกบัตร
+    Input Text  xpath=//*[@id="DateOfIssue"]   05/03/2565
+    Sleep   ${DELAY}
+    #Click ไปเรือย
+    Click Element  xpath=//*[@id="customer"]/div  
+    #เบอร์โทร
+    Input Text  //*[@id="MobileNo"]  0841233456
+    Sleep   10
