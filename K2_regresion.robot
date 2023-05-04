@@ -3,20 +3,38 @@ Library           SeleniumLibrary
 
 
 *** Variable ***
-${DELAY}  0.7
+${DELAY}  0.5
 ${URL}  http://uat01.hengleasing.com/Login
 ${BROWSER_EDGE}  Edge
 ${LOGIN BUTTON}  xpath=//*[@id="btnLogin"]
 ${USERNAME TEXTBOX}  xpath=//*[@id="Username"]
 ${PASSWORD TEXTBOX}  xpath=//*[@id="Password"]
- #เลือกประเภทสินเชื่อ
+#เลือกประเภทสินเชื่อ
+#กู้
 ${CHOICE P-LOAN}  xpath=//div[@class="bootstrap-dialog-message"]/a[@class="btn btn-requisition-create btn-block btn-color3"]
+#ปรับปรุงโครงสร้างหนี้ (TDR)
+#${CHOICE TDR}   xpath=//*[@id="CustomerDemandTypeID"]/option[3]
+#ปรับปรุงโครงสร้างหนี้เชิงป้องกัน (PDR)
+#//*[@id="CustomerDemandTypeID"]/option[5]
+#รีไฟแนนซ์ PDR ชั้น P
+#//*[@id="CustomerDemandTypeID"]/option[6]
+#รีไฟแนนซ์ชั้น P
+#//*[@id="CustomerDemandTypeID"]/option[7]
+#รีไฟแนนซ์ชั้น SM
+#//*[@id="CustomerDemandTypeID"]/option[8]
+#สินเชื่อแก่ผู้จัดจำหน่ายรถยนต์ (Floor Plan)
+#//*[@id="CustomerDemandTypeID"]/option[8]
+#สินเชื่อส่วนบุคคลเพื่อคนอยากมีรถ
+#//*[@id="CustomerDemandTypeID"]/option[9]
 ######### ข้อมูลผู้กู้ #############
 #ใส่เลขบัตรประชาชน
 ${CARD NUMBER TEXTBOX}  xpath=//*[@id="IDCardNo"]
 #ใส่ชื่อ/นามสกุล
 ${FIRST NAME}   ทดสอบ 001
 ${SURE NAME}    นามสกุล นายทดสอบ 001 
+#NameEng/LastNameENG 
+${F NAME ENG}   sombun
+${L NAME ENG}   test
 #วันเดือนปีเกิด
 ${AGE}      03/05/2530
 #ประเภทเงินกู้ 
@@ -70,6 +88,7 @@ INPUT
     Input Text  ${CARD NUMBER TEXTBOX}  ${CARD}
     Sleep   ${DELAY}
     Input Text       xpath=//*[@id="FirstNameTH"]  ${FIRST NAME}
+    Sleep   ${DELAY}
     Input Text       xpath=//*[@id="LastNameTH"]  ${SURE NAME}
     Sleep   ${DELAY}
     #DropDown ประเภทเงินกู้
@@ -80,12 +99,24 @@ INPUT
     Sleep   ${DELAY}
     #DropDown ระดับการศึกษา
     Click Element   xpath=//*[@id="EducationLevelID"]/option[6]
+    #สถานศึกษา
+    #Input Text  xpath=//*[@id="EducationalInstitution"]  Bkk
+    Sleep   ${DELAY}
+    #คณะ
+    #Input Text  xpath=//*[@id="EducationalInstitution"] คณะลาบ
+    Sleep   ${DELAY}
     Input Text  xpath=//*[@id="BirthDate"]    ${AGE}
     #DropDown วันที่ออกบัตร
     Input Text  xpath=//*[@id="DateOfIssue"]   05/03/2565
     Sleep   ${DELAY}
     #Click ไปเรือย
-    Click Element  xpath=//*[@id="customer"]/div  
+    Click Element  xpath=//*[@id="customer"]/div
     #เบอร์โทร
     Input Text  //*[@id="MobileNo"]  0841233456
-    Sleep   10
+    Sleep   ${DELAY}
+    #NameEng/LastNameENG
+    Input Text  //*[@id="FirstNameEN"]      ${F NAME ENG}
+    Sleep   ${DELAY}
+    Input Text  //*[@id="LastNameEN"]       ${L NAME ENG}
+    Sleep   ${DELAY}
+    
