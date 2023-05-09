@@ -1,7 +1,6 @@
 *** Settings ***
 Library           SeleniumLibrary
-
-
+#Library    SikuliLibrary
 *** Variable ***
 ${DELAY0.6}     0.5
 ${DELAY1.5}     1.5
@@ -29,6 +28,7 @@ ${CHOICE P-LOAN}  xpath=//div[@class="bootstrap-dialog-message"]/a[@class="btn b
 #//*[@id="CustomerDemandTypeID"]/option[9]
 ######### ข้อมูลผู้กู้ #############
 #ใส่เลขบัตรประชาชน
+${CARD}     2145750767383  #ใส่เลขบัตรประชาชน
 ${CARD NUMBER TEXTBOX}   xpath=//*[@id="IDCardNo"]
 ${ID_CARD_MARRIED_TEXTBOX}  xpath=//*[@id="SpouseIDCardNo"]
 #ใส่ชื่อ/นามสกุล
@@ -39,13 +39,17 @@ ${F NAME ENG}   sombun
 ${L NAME ENG}   test
 #วันเดือนปีเกิด
 ${AGE}      03/05/2530
-#ประเภทเงินกู้ 
+#Location รูป
+${Picture}      C:/Users/Sombun.Th/Downloads/Cat03.jpg
+#DropDown ประเภทเงินกู้
+${TypeLoand}    //*[@id="CustomerDemandTypeID"]/option[2]  #กู้
 #${TypeSelect}   
 *** Test Case ***
 Case 0 : OpenBrowser
     [Documentation]  OpenBrowser>Login>InputUsernamePassword
     Open Browser  ${URL}  ${BROWSER_EDGE}
     Sleep   ${DELAY0.6}
+    Maximize Browser Window
     Login  P_Manager0001  Dev@te5t
     Log     เปิด WEB สำเร็จ
 Case 1 : ใบคำขอสินเชื่อ>รายการใบคำขอสินเชื่อ
@@ -57,7 +61,7 @@ Case 2 : เลือกประเภทสินเชื่อ
     Typeloan
 Case 3 : Input Text
     [Documentation]    กรอกรายละเอียด"ใบคำขอสินเชื่อ" 
-    InfomationฺBorrower  6128717074264   #เลขที่บัตรประชาชน
+    InfomationฺBorrower
 Case 4 : ที่อยู่อาศัย/หลักทรัพย์
     [Documentation]     กรอกรายละเอียด
     House
@@ -71,6 +75,13 @@ Case 7 : คู่สมรส
     [Documentation]     กรอกรายละเอียดคู่สมรส
     Married     6547735015024   #เลขที่บัตรประชาชนคู่สมรส  
     #Single
+Case 8 : เอกสารประกอบใบคำขอสินเชื่อ
+    [Documentation]     Upload รูปภาพ
+    UploadPicture
+#Case 9 : สินค้า
+    [Documentation]     ใส่รายละเอียดสินค้า
+    #ProductCar
+
 *** Keywords ***
 Login
     [Documentation]  Arguments Login & CardNumber
@@ -81,12 +92,11 @@ Login
     Sleep  ${DELAY0.6}
     Click Element  ${LOGIN BUTTON}
     # รอให้โหลดหน้าเว็บเสร็จสมบูรณ์ 5 วินาที
-    Set Browser Implicit Wait  5  
+    Set Browser Implicit Wait  5
     Click Element   ${LOGIN BUTTON}
     Sleep  ${DELAY0.6}
 ApplicationForm
     [Documentation]  เลือก DropDown(ใบคำขอสินเชื่อ)
-    Maximize Browser Window
     Click Element   xpath=//li[@class="dropdown"]/a[text()=" ใบคำขอสินเชื่อ "]
     Sleep           ${DELAY0.6}
     Click Element   xpath=//ul[@class="dropdown-menu"]/li[1]/a
@@ -101,18 +111,36 @@ Typeloan
     Sleep           ${DELAY0.6}
 InfomationฺBorrower
     [Documentation]   กรอกข้อมูลผู้กู้
-    [Arguments]  ${CARD}
+    #[Arguments]  ${CARD}
+    #กดปุ่ม KYC
+    Click Element   xpath=//*[@id="buttonUnlockEKYC"]
+    sleep           ${DELAY0.6}
+    #คลิก Dropdown ใน E-KYC
+    Click Element   xpath=//*[@id="ReasonID"]
+    sleep           ${DELAY0.6}
+    #เลือก อื่นๆ
+    Click Element   xpath=//*[@id="ReasonID"]/option[14]
+    sleep           ${DELAY0.6}
+    #พิมพ์ข้อความ
+    Input Text      xpath=//*[@id="Reason"]     Automate Test ใบคำขอ
+    sleep           ${DELAY0.6}
+    #กดบันทึก E-KYC
+    Click Element   xpath=//div[@class="bootstrap-dialog-footer-buttons"]/button
+    sleep           ${DELAY0.6}
+    Click Element   xpath=//div[@class="bootstrap-dialog-footer-buttons"]//button[@class="btn btn-warning"]
+    sleep           ${DELAY0.6}
+    #Click Element   xpath=//*[@id="8fcfd804-9b92-49c2-b6c4-18261cfef447"]
     Input Text  ${CARD NUMBER TEXTBOX}  ${CARD}
-    #Sleep   ${DELAY0.6}
+    Sleep   ${DELAY0.6}
     Input Text       xpath=//*[@id="FirstNameTH"]  ${FIRST NAME}
-    #Sleep   ${DELAY0.6}
+    Sleep   ${DELAY0.6}
     Input Text       xpath=//*[@id="LastNameTH"]  ${SURE NAME}
     #ชื่อเล่น
     Input Text  xpath=//*[@id="NickName"]   ทดสอบ
     INPUT Text  xpath=//*[@id="Alias"]     ทดสอบ
-    #Sleep   ${DELAY0.6}
+    Sleep   ${DELAY0.6}
     #DropDown ประเภทเงินกู้
-    Click Element    xpath=//*[@id="CustomerDemandTypeID"]/option[2]
+    Click Element    ${TypeLoand}
     Sleep   ${DELAY0.6}
     #DropDown เพศ
     Click Element    xpath=//*[@id="PrefixID"]/option[2]
@@ -155,9 +183,10 @@ InfomationฺBorrower
     #ถนน
     Input Text      xpath=//*[@id="Road"]           ปัทมานนท์
     #DropDown จังหวัด "กทม."
-    Click Element      xpath=//*[@id="ProvinceID"]/option[2]
+    Click Element      xpath=//*[@id="ProvinceID"]/option[40]
     #DropDown อำเภอ
-    Click Element      xpath=//*[@id="DistrictID"]/option[32]
+    Click Element      xpath=//*[@id="DistrictID"]/option[15]
+    Sleep   ${DELAY1.5}
     #DropDown ตำบล
     Click Element      xpath=//*[@id="SubDistrictID"]/option[2]
     Sleep   ${DELAY0.6}
@@ -165,17 +194,29 @@ InfomationฺBorrower
     #Input Text         xpath=//*[@id="PostalCode"]      10120
     #กดบันทึก
     Click Element      xpath=//*[@id="frmAddress"]/div[8]/div/button
-    #Sleep      5
+    sleep   ${DELAY0.6}
+
     #ที่อยู่ปัจจุบัน
     Click Element       xpath=//*[@id="buttonPresentAddress"]
     #DropDown"ตามทะเบียนบ้าน"
     Sleep   ${DELAY0.6}
     Click Element       xpath=//*[@id="SelectAddressType"]/option[2]
+    Sleep   ${DELAY0.6}
     Click Element       xpath=//*[@id="IsCopyAddress"]
     Sleep   ${DELAY0.6}
     Click Element       xpath=//*[@id="frmAddress"]/div[8]/div/button
+    #ที่อยู่จัดส่งเอกสาร Button
+    Click Element      xpath=//*[@id="buttonMailingAddress"]
+    Sleep   ${DELAY0.6}
+    Click Element      xpath=//*[@id="SelectAddressType"]/option[3]
+    Sleep   ${DELAY0.6}
+    Click Element      xpath=//*[@id="IsCopyAddress"]
+    sleep       ${DELAY0.6}
+    #กดบันทึก Button
+    Click Element      xpath=//*[@id="frmAddress"]/div[8]/div/button
 House
     [Documentation]     #ที่อยู่อาศัย>เจ้าบ้าน>รัศมีการตรวจสอบ
+    Execute Javascript    window.scrollTo(0,0);
     Click Element   xpath=//*[@id="IsHouseholdRegistrationOwner"]
     Sleep   ${DELAY0.6}
     Input Text  xpath=//*[@id="CustomerLocationDistance"]   5
@@ -262,7 +303,7 @@ ChoiceClass
     Sleep   ${DELAY0.6}
     #ที่อยู่ทำงาน (ClickButton)
     Click Element   xpath=//*[@id="buttonWorkingAddress"]
-    Sleep   ${DELAY0.6}
+    Sleep   ${DELAY1.5}
     #Click Dropdown "ทะเบียนบ้าน"
     Click Element   xpath=//*[@id="SelectAddressType"]/option[2]
     #Click CheckBox CopyAddress
@@ -310,7 +351,7 @@ Married
     Input Text      xpath=//*[@id="SpouseBirthDate"]        10/03/2530
     Sleep   ${DELAY0.6}
     #คลิกไปเรื่อย
-    Click Element   xpath=/html/body/div[1]/div/div[2]
+    #Click Element   xpath=/html/body/div[1]/div/div[2]
     Input Text      xpath=//*[@id="SpouseRace"]         ไทย
     #DropDown เลือกประเภทบัตร
     Click Element     xpath=//*[@id="SpouseIDCardType"]/option[2]
@@ -341,6 +382,52 @@ Married
     Click Element   xpath=//*[@id="CalculateType"]/option[3]
     Sleep   ${DELAY0.6}
     Click Element   xpath=//*[@id="btnCalculateIncome"]
-    Sleep   10
+    sleep   ${DELAY0.6}
+    Execute Javascript    window.scrollTo(0,0);
+    #Sleep   50
+UploadPicture
+    [Documentation]     Upload รูปภาพ
+    #คลิกเอกสารประกอบใบคำขอสินเชื่อ
+    Click Element   xpath=//*[@id="securedLoanTab"]/li[2]/a
+    sleep   ${DELAY0.6}
+    #หนังสือยินยอมให้ตรวจเครดิตบูโร (NCB)
+    Choose File    xpath=//*[@id="fileConsent"]     ${Picture}
+    #สำเนาบัตรประชาชน/บัตรข้าราชการ/รัฐวิสาหกิจ
+    Choose File    xpath=//*[@id="fileIDCard"]     ${Picture}
+    sleep   ${DELAY0.6}
+    #upload รูป "ใบคำขอสินเชื่อ"
+    Choose File    xpath=//*[@id="fileRequisition"]     ${Picture}
+    sleep   ${DELAY0.6}
+    #สำเนาทะเบียนบ้าน
+    Choose File    xpath=//*[@id="fileRegisterHome"]     ${Picture}
+    #PDPA
+    Choose File   xpath=//*[@id="fileCustomerPDPA"]     ${Picture}
+    #OA
+    Choose File   xpath=//*[@id="fileConsentOA"]     ${Picture}
+    #OA คู๋สมรส
+    Choose File   xpath=//*[@id="fileSpouseConsentOA"]     ${Picture}
+    sleep  ${DELAY0.6}
+    Execute Javascript    window.scrollTo(0,0);
+    sleep   500
+#ProductCar
+    [Documentation]     รายละเอียดสินค้า
+    #กด Tab สินค้า
+    Click Element   xpath=//*[@id="securedLoanTab"]/li[3]/a
+    sleep  ${DELAY0.6}
+    #Dropdown วัตถุประสงค์
+    Click Element   xpath=//*[@id="PurposeLoanID"]/option[2]
+    sleep  ${DELAY0.6}
+    #ช่องทางที่นำพาลูกค้ามา
+    Click Element   xpath=//*[@id="CustomerChannelID"]/option[3]
+    #ประเภทสินค้า
+    #Cliick Element  xpath=//*[@id="select2-AssetTypeID-container"]
+    #Click Element   xpath=//*[@id="select2-AssetTypeID-container"]
+    #PriceList Button
+    CLick Element   xpath=//*[@id="buttonAssetPriceList"]
+    sleep   ${DELAY0.6}
+    Click Element   xpath=//*[@id="AssetTypeID"]
+    sleep   ${DELAY0.6}
+    Click Element   xpath=//*[@id="AssetTypeID"]/option[4]
+    sleep   5
 #Single
 
